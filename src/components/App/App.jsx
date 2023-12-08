@@ -17,6 +17,25 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const startContacts = JSON.parse(
+      window.localStorage.getItem('CONTACTS_DATA')
+    );
+    // console.log(startContacts);
+    if (startContacts?.length) {
+      this.setState({ contacts: [...startContacts] });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      window.localStorage.setItem(
+        'CONTACTS_DATA',
+        JSON.stringify(this.state.contacts)
+      );
+    }
+  }
+
   createContact = newContact => {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
