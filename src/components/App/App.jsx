@@ -21,7 +21,6 @@ export class App extends Component {
     const startContacts = JSON.parse(
       window.localStorage.getItem('CONTACTS_DATA')
     );
-    // console.log(startContacts);
     if (startContacts?.length) {
       this.setState({ contacts: [...startContacts] });
     }
